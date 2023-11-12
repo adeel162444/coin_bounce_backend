@@ -16,7 +16,7 @@ app.use(cookieParser());
 //routes
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
-app.use("/storage", express.static("storage"));
+
 app.use("/api/user", userRouter);
 app.use("/api/blog", blogRouter);
 app.use("/api/comment", commentRouter);
