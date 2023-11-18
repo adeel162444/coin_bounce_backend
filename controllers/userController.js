@@ -145,7 +145,11 @@ exports.getSingleUser = async (req, res) => {
 // user logout
 exports.logout = async (req, res) => {
   try {
-    res.clearCookie("access_token");
+    res.clearCookie("access_token", {
+      sameSite: "None",
+      httpOnly: true,
+      secure: true,
+    });
     res.json({
       success: true,
       message: "user logged out successfully",
