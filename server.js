@@ -9,7 +9,15 @@ const commentRouter = require("./routes/commentRoute");
 const app = express();
 const port = process.env.PORT;
 const cors = require("cors");
-app.use(cors({ origin: process.env.CLIENT_BASE_PATH, credentials: true }));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      return callback(null, true);
+    },
+    optionsSuccessStatus: 200,
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
