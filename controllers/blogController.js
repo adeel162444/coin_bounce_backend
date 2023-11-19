@@ -18,18 +18,13 @@ cloudinary.config({
 exports.createBlog = async (req, res) => {
   try {
     const { title, description } = req.body;
-    const { image } = req.files;
+    console.log("req", req);
     const author = req.user.id;
     let response;
     console.log("image is:-", image);
-    if (!title || !description || !image) {
+    if (!title || !description) {
       errorMessage(res, 400, "Please fill out all the details");
     } else {
-      try {
-        response = await cloudinary.uploader.upload(image);
-      } catch (error) {
-        console.log("error while uploading image", error);
-      }
       const blog = new blogModel({
         title,
         description,
