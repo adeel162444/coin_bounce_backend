@@ -10,7 +10,7 @@ const { verifyToken } = require("../controllers/userController");
 const upload = require("../multerConfig");
 
 const blogRouter = express.Router();
-blogRouter.route("/new").post(verifyToken, upload.single("image"), createBlog);
+blogRouter.route("/new").post(verifyToken, createBlog);
 blogRouter.route("/all").get(verifyToken, getAllBlogs);
 blogRouter.route("/single/:id").get(verifyToken, getBlogById);
 blogRouter
