@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const commentModel = require("../models/commentModel");
 const { findOne, findByIdAndUpdate } = require("../models/userModel");
 const { unlink } = require("fs/promises");
-const { cloudinary } = require("cloudinary");
+const cloudinary = require("cloudinary");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
