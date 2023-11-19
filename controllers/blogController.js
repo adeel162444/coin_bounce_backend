@@ -17,7 +17,8 @@ cloudinary.config({
 //create blog
 exports.createBlog = async (req, res) => {
   try {
-    const { title, description, image } = req.body;
+    const { title, description } = req.body;
+    const { image } = req.files;
     const author = req.user.id;
     let response;
     console.log("image is:-", image);
