@@ -11,10 +11,7 @@ const port = process.env.PORT;
 const cors = require("cors");
 app.use(
   cors({
-    origin: function (origin, callback) {
-      return callback(null, true);
-    },
-    optionsSuccessStatus: 200,
+    origin: process.env.CLIENT_BASE_PATH,
     credentials: true,
   })
 );
