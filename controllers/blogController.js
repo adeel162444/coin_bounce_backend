@@ -7,29 +7,25 @@ const jwt = require("jsonwebtoken");
 const commentModel = require("../models/commentModel");
 const { findOne, findByIdAndUpdate } = require("../models/userModel");
 const { unlink } = require("fs/promises");
-const cloudinary = require("cloudinary");
+const cloudinary = require("../cloudinary/cloudinary.js");
 
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET,
-});
 //create blog
 exports.createBlog = async (req, res) => {
   try {
     const { title, description } = req.body;
     console.log("req", req);
     const author = req.user.id;
-    let response;
-    console.log("image is:-", image);
-    if (!title || !description) {
+    const image = req.files.image;
+    let cloud_respone;
+    if (!title || !description || !image) {
       errorMessage(res, 400, "Please fill out all the details");
     } else {
+      cloud_respone = await cloudinary.uploader.upload(image.tempFilePath);
       const blog = new blogModel({
         title,
         description,
         author,
-        imagePath: response.url,
+        imagePath: cloud_respone.url,
       });
       await blog.save();
       const blogDto = new BlogDTO(blog);
